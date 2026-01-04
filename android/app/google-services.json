@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "827671354554",
+    "project_id": "turnopol-2021",
+    "storage_bucket": "turnopol-2021.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:827671354554:android:e13897c5950c05df433683",
+        "android_client_info": {
+          "package_name": "com.example.turnopol"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDL-acdl2U1dimjgV0-1ou6co-He7NkfE4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
