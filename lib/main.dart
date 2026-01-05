@@ -1,47 +1,34 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'firebase_options.dart';
+import 'package:provider/provider.dart';
+import 'package:turnopol/pages/root_page.dart';
+import 'core/theme.dart';
+import 'providers/root_provider.dart';
+import 'hive/hive_service.dart';
 
-void main() async {
-  // En desarrollo
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await HiveService.initHive();
+
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(lazy: false, create: (_) => RootProvider()),
+      ],
+      child: const TurnopolApp(),
+    ),
   );
-  runApp(const MainApp());
 }
 
-class MainApp extends StatelessWidget {
-  const MainApp({super.key});
+class TurnopolApp extends StatelessWidget {
+  const TurnopolApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: Scaffold(gity
-        body: RootPage()
-      )
-    );
-  }
-}
-
-class RootPage extends StatelessWidget {
-  const RootPage({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const Scaffold(
-      bottomNavigationBar: BottomAppBar(
-        child: SizedBox(
-          height: 50,
-          child: Center(
-            child: Text('Bottom App Bar'),
-          ),
-        ),
-      ),
-      body: Center(
-        child: Text('Root Page'),
-      ),
+    return MaterialApp(
+      theme: ThemeColors.themeData,
+      themeMode: ThemeMode.dark,
+      home: const RootPage()
     );
   }
 }

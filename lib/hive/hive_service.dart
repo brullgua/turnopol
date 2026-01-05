@@ -1,16 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:hive_ce_flutter/hive_flutter.dart';
 
+import 'package:turnopol/hive/hive_adapters.dart';
+
 class HiveService {
-  static final HiveService _instance = HiveService._internal();
-  
-  factory HiveService() {
-    return _instance;
-  }
-  
-  HiveService._internal() {
-    initHive();
-  }
+  HiveService._();
 
   static const String settingsBox = 'settings';
   static const String taskBox = 'tasks';
@@ -19,17 +13,21 @@ class HiveService {
   static const String testBox = 'testBox';
 
   static Future<void> initHive() async {
-    await Hive.initFlutter().then(  
-      (_) => debugPrint('✅ Hive initialized successfully\nAbrindo boxes...'),
-    ).catchError(
-      (error) => debugPrint('❌ Error initializing Hive: $error'),
-    );
+    try {
+      await Hive.initFlutter();
+      Hive.registerAdapter(EventModelAdapter());
+      Hive.registerAdapter(TaskModelAdapter());
+      HiveAdapters.register();
 
-    await Hive.openBox(settingsBox);
-    await Hive.openBox(taskBox);
-    await Hive.openBox(eventBox);
-    await Hive.openBox(workBox);
-    await Hive.openBox(testBox);
+      await Hive.openBox(settingsBox);
+      await Hive.openBox(taskBox);
+      await Hive.openBox(eventBox);
+      await Hive.openBox(workBox);
+      await Hive.openBox(testBox);
+      debugPrint('✅ Hive initialized and boxes opened successfully');
+    } catch (error) {
+      debugPrint('❌ Error initializing Hive: $error');
+    }
   }
 
   static Box getBox(String nameBox) {
