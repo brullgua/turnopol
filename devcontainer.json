@@ -1,0 +1,17 @@
+{
+  "name": "turnopol - Swift (Dockerfile)",
+  "build": {
+    "dockerfile": "Dockerfile"
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "vknabel.vscode-swift-development-environment",
+        "sswg.swift-language"
+      ]
+    }
+  },
+  "forwardPorts": [8080],
+  "postCreateCommand": "swift --version && swift build || true",
+  "remoteUser": "vscode"
+}
