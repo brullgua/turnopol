@@ -1,0 +1,10 @@
+{
+  "name": "turnopol",
+  "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
+  "features": {
+    "ghcr.io/nordcominc/devcontainer-features/android-sdk:1": {},
+    "ghcr.io/devcontainers-community/templates/dart:1": {},
+    "ghcr.io/Evit15/devcontainer-features/adb-fastboot:1": {},
+    "ghcr.io/devcontainers/features/python:1": {}
+  }
+}
